@@ -78,8 +78,8 @@ void desenharJogo( Jogo *jogo ) {
     ClearBackground( WHITE );
 
     BeginMode2D(jogo->camera);
-        desenharInimigo( &jogo->inimigo );
         desenharJogador( &jogo->jogador );
+        desenharInimigo( &jogo->inimigo );
     EndMode2D();
 
     DrawFPS( 5, 5 );

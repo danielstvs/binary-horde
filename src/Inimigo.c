@@ -15,9 +15,22 @@ Inimigo criarInimigo(
         .velocidade = VELOCIDADE_INICIAL_INIMIGO,
     } ;
 }
-
+/**
+ *  Move o inimigo em direção ao personagem.
+ *  A direção do movimento é o cálculo normalizado da distância das coordenadas x e y dos centros
+ *  dos elementos: direçãoMovimento = Normalizar( centroJogador - centroInimigo )
+ * 
+ *  Cálculo do centro do elemento: centro = posicaoElemento + tamanhoElemento / 2.
+ */
 void atualizarInimigo( Inimigo *inimigo, Jogador *jogador, float delta ) {
-    inimigo->direcao = Vector2Normalize( Vector2Subtract( jogador->posicao, inimigo->posicao ) );
+    inimigo->direcao = Vector2Normalize( 
+        Vector2Subtract( 
+            Vector2Add( 
+                jogador->posicao, Vector2Scale( jogador->dimensao, 0.5f ) ), // Centro do personagem
+            Vector2Add( 
+                inimigo->posicao, Vector2Scale(inimigo->dimensao, 0.5f ) )   // Centro do inimigo      
+        ) 
+    );
     inimigo->posicao.x += inimigo->direcao.x * inimigo->velocidade * delta;
     inimigo->posicao.y += inimigo->direcao.y * inimigo->velocidade * delta;
 }
