@@ -10,11 +10,6 @@
 #include "Jogo.h"
 #include "Recursos.h"
 
-/**
- * @brief Cria uma instância da struct Jogo alocada dinamicamente.
- * 
- * @return Jogo* Ponteiro para o jogo criado ou NULL se falhar.
- */
 Jogo *criarJogo( void ) {
 
     Jogo *jogo = (Jogo*) malloc( sizeof( Jogo ) );
@@ -24,38 +19,40 @@ Jogo *criarJogo( void ) {
             GetScreenWidth() / 2,
             GetScreenHeight() / 2 
         },
-        (Vector2) { 0, 0 },
+        (Vector2) { 0.0f, 0.0f },
         (Vector2) { 32, 32 },
         BLUE
+    );
+    
+    jogo->inimigo = criarInimigo(
+        (Vector2) { 
+            GetScreenWidth() - 30,
+            GetScreenHeight() - 30 
+        },
+        (Vector2) { 0.0f, 0.0f },
+        (Vector2) { 16, 16 },
+        RED
     );
 
     return jogo;
 }
 
-/**
- * @brief Distroi o objeto Jogo e suas dependências.
- */
 void destruirJogo( Jogo *jogo ) {
     free( jogo );
 }
 
-/**
- * @brief Lê os comandos do usuário e atualiza o estado do jogo. 
- * 
- */
 void atualizarJogo( Jogo *jogo, float delta ) {
     processarEntradaJogador( &jogo->jogador );
     atualizarJogador( &jogo->jogador, delta);
+    atualizarInimigo( &jogo->inimigo, &jogo->jogador, delta);
 }
 
-/**
- * @brief Desenha o estado atual do jogo.
- */
 void desenharJogo( Jogo *jogo ) {
 
     BeginDrawing();
     ClearBackground( WHITE );
 
+    desenharInimigo( &jogo->inimigo );
     desenharJogador( &jogo->jogador );
 
     DrawFPS( 10, 10 );

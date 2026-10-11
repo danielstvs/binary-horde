@@ -1,7 +1,6 @@
 #pragma once
 
 #include <stdbool.h>
-
 #include "Jogo.h"
 
 typedef struct Janela {

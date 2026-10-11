@@ -5,6 +5,7 @@
 
 #include "Janela.h"
 #include "Jogo.h"
+#include "Inimigo.h"
 #include "Recursos.h"
 
 /**

@@ -1,9 +1,12 @@
 #pragma once
 
 #include "Jogador.h"
+#include "Inimigo.h"
+
 
 typedef struct Jogo {
     Jogador jogador;
+    Inimigo inimigo;
 } Jogo;
 
 /**
@@ -19,7 +22,7 @@ Jogo *criarJogo( void );
 void destruirJogo( Jogo *jogo );
 
 /**
- * @brief Lê os comandos do usuário e atualiza o estado do jogo.
+ * @brief Atualiza o estado do jogo.
  */
 void atualizarJogo( Jogo *jogo, float delta );
 

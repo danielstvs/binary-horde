@@ -1,5 +1,4 @@
 #include "Jogador.h"
-#include "raylib.h"
 #include "raymath.h"
 
 Jogador criarJogador( 
@@ -16,9 +15,14 @@ Jogador criarJogador(
         .velocidade = VELOCIDADE_INICIAL,
     };
 }
-
+/**
+ *  Garante que o personagem fique parado caso haja 
+ *  interrupção das instruções de movimento;
+ *  Lê os atalhos de teclado correspondente à direção dos comandos;
+ *  Calcula a normalização para evitar ganho de velocidade
+ *  ao se movimentar nas diagonais.
+ */
 void processarEntradaJogador( Jogador *jogador ) {
-    // Parar o jogador imediatamente ao soltar as teclas de movimento.
     jogador->direcao = (Vector2){ 0.0f, 0.0f };
     
     if ( IsKeyDown( KEY_A ) ) jogador->direcao.x -= 1.0f;
@@ -26,7 +30,6 @@ void processarEntradaJogador( Jogador *jogador ) {
     if ( IsKeyDown( KEY_W ) ) jogador->direcao.y -= 1.0f;
     if ( IsKeyDown( KEY_S ) ) jogador->direcao.y += 1.0f;
   
-    // Evita o ganho de velocidade ao se movimentar nas diagonais.
     jogador->direcao = Vector2Normalize( jogador->direcao );
 }
 
