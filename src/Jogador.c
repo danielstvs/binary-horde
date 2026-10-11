@@ -23,7 +23,7 @@ Jogador criarJogador(
  *  ao se movimentar nas diagonais.
  */
 void processarEntradaJogador( Jogador *jogador ) {
-    jogador->direcao = (Vector2){ 0.0f, 0.0f };
+    jogador->direcao = Vector2Zero();
     
     if ( IsKeyDown( KEY_A ) ) jogador->direcao.x -= 1.0f;
     if ( IsKeyDown( KEY_D ) ) jogador->direcao.x += 1.0f;
