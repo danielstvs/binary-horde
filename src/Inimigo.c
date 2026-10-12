@@ -13,8 +13,10 @@ Inimigo criarInimigo(
         .dimensao = dimensao,
         .cor = cor,
         .velocidade = VELOCIDADE_INICIAL_INIMIGO,
+        .ativo = true
     } ;
 }
+
 /**
  *  Move o inimigo em direção ao personagem.
  *  A direção do movimento é o cálculo normalizado da distância das coordenadas x e y dos centros
@@ -35,6 +37,11 @@ void atualizarInimigo( Inimigo *inimigo, Jogador *jogador, float delta ) {
     inimigo->posicao.y += inimigo->direcao.y * inimigo->velocidade * delta;
 }
 
+/**
+ * @brief Desenha inimigo na tela.
+ * 
+ * @param inimigo Endereço do inimigo;
+ */
 void desenharInimigo( Inimigo *inimigo ){
     DrawRectangle(
         inimigo->posicao.x,

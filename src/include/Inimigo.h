@@ -1,9 +1,11 @@
 #pragma once
 
+#include <stdbool.h>
 #include "Jogador.h"
 #include "raylib.h"
+#include "stdlib.h"
 
-#define VELOCIDADE_INICIAL_INIMIGO 60
+#define VELOCIDADE_INICIAL_INIMIGO 30
 
 typedef struct Inimigo {
     Vector2 posicao;
@@ -11,6 +13,7 @@ typedef struct Inimigo {
     Vector2 dimensao;
     Color cor;
     float velocidade;
+    bool ativo;
 } Inimigo;
 
 /**

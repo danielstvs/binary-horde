@@ -7,11 +7,11 @@
 int main( void ) {
 
     Janela *janela = criarJanela(
-        800,             // width
-        450,             // height
+        1280,            // width
+        720,             // height
         "Binary Horde",  // title
         60,              // target FPS
-        false,            // antialiasing
+        false,           // antialiasing
         false,           // resizable
         false,           // full screen
         false,           // undecorated

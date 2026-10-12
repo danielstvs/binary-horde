@@ -1,16 +1,19 @@
 #pragma once
 
 #include "raylib.h"
-#include "Jogador.h"
 #include "Inimigo.h"
+#include "Jogador.h"
 
+#define QTD_MAX_INIMIGOS 50
 #define VEL_SUAVIDADE_CAMERA 8.0f
 
 typedef struct Jogo {
     Jogador jogador;
-    Inimigo inimigo;
+    Inimigo inimigo[QTD_MAX_INIMIGOS];
+    int qtdInimigosAtivos;
     Camera2D camera;
     float velSuavidadeCamera;
+    float tempoDecorrido;
 } Jogo;
 
 /**
@@ -38,10 +41,12 @@ Camera2D criarCamera( Jogador *jogador );
  */
 void moverCamera( Camera2D *camera, Jogador *jogador, float velSuavidadeCamera, float delta);
 
-/**
- * @brief Distroi o objeto Jogo e suas dependências.
- */
-void destruirJogo( Jogo *jogo );
+
+void percorerCriarInimigos(Jogo *jogo);
+
+void percorrerAtualizarInimigos( Jogo *jogo, float delta );
+
+void percorrerDesenharInimigos( Jogo *jogo );
 
 /**
  * @brief Atualiza o estado do jogo.
@@ -52,3 +57,8 @@ void atualizarJogo( Jogo *jogo, float delta );
  * @brief Desenha o estado atual do jogo.
  */
 void desenharJogo( Jogo *jogo );
+
+/**
+ * @brief Distroi o objeto Jogo e suas dependências.
+ */
+void destruirJogo( Jogo *jogo );
