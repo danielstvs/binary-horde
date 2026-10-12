@@ -13,7 +13,7 @@ typedef struct Jogo {
     int qtdInimigosAtivos;
     Camera2D camera;
     float velSuavidadeCamera;
-    float tempoDecorrido;
+    float tempoDecorrido;       // Contador de tempo para fases
 } Jogo;
 
 /**
@@ -41,11 +41,26 @@ Camera2D criarCamera( Jogador *jogador );
  */
 void moverCamera( Camera2D *camera, Jogador *jogador, float velSuavidadeCamera, float delta);
 
-
+/**
+ * @brief Percorre o array até o fim e cria inimigos.
+ * 
+ * @param jogo 
+ */
 void percorerCriarInimigos(Jogo *jogo);
 
+/**
+ * @brief Percorre o array até o fim e atualiza os inimigos ativos.
+ * 
+ * @param jogo 
+ * @param delta 
+ */
 void percorrerAtualizarInimigos( Jogo *jogo, float delta );
 
+/**
+ * @brief Percorre o array até o fim e desenha inimigos ativos.
+ * 
+ * @param jogo 
+ */
 void percorrerDesenharInimigos( Jogo *jogo );
 
 /**

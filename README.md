@@ -1,7 +1,5 @@
 # Binary Horde
-Projeto que implementa conceitos de estruturas de dados em um jogo utilizando [Raylib](https://github.com/raysan5/raylib).
-
----
+Projeto inspirado em **Vampire Survivors** que implementa conceitos de estruturas de dados, desenvolvido em **linguagem C** utilizando a engine/biblioteca [Raylib](https://github.com/raysan5/raylib).
 
 ## Como Executar o Projeto
 

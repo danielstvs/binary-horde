@@ -87,7 +87,6 @@ void percorrerDesenharInimigos( Jogo *jogo ) {
 }
 
 void atualizarJogo( Jogo *jogo, float delta ) {
-    jogo->tempoDecorrido += delta;
     percorerCriarInimigos( jogo );
     processarEntradaJogador( &jogo->jogador );
     atualizarJogador( &jogo->jogador, delta);
