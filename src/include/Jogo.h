@@ -5,7 +5,7 @@
 #include "Jogador.h"
 
 #define QTD_MAX_INIMIGOS 50
-#define VEL_SUAVIDADE_CAMERA 8.0f
+#define SUAVIDADE_CAMERA 8.0f
 
 typedef struct Jogo {
     Jogador jogador;
