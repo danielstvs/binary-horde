@@ -6,32 +6,28 @@
 
 typedef struct Inimigo {
     Vector2 posicao;
-    Vector2 direcao;
+    Vector2 direcao;    // CASO UTILIZAR A FUNÇÃO DA RAYLIB PARA MOVER PERSONAGEM, RETIRAR ESSE ATRIBUTO, POIS AINDA NÃO É UTILIZADO EM OUTRA FUNÇÃO.
     Vector2 dimensao;
-    Color cor;
     float velocidade;
     bool ativo;
+    Color cor;
 } Inimigo;
 
 /**
  * @brief Cria a instância do Inimigo.
  * 
- * @param posicao   Coordenadas x e y do inimigo.
- * @param direcao   Target do movimento, se move na direção do jogador.
  * @param dimensao  Tamanho do inimigo.
  * @param cor       Cor do inimigo.
  * @return Inimigo 
  */
-Inimigo criarInimigo( Vector2 posicao, Vector2 direcao, Vector2 dimensao, Color cor );
+Inimigo criarInimigo( Vector2 dimensao, Color cor ); // DEVE RECEBER COMO PARAMETRO SOMENTE QUAL DEVERÁ SER O INIMIGO CRIADO
 
 /**
  * @brief Calcula uma posição aleatória fora da visão da câmera.
  * 
- * @param centroTela    A posição do centro da tela (x,y).
- * @param raio          Metade da diagonal da tela.
  * @return Vector2      Retorna um ponto (x,y) na circunferência.
  */
-Vector2 calcularPosicao( Vector2 centroTela, float raio );
+Vector2 calcularPosicao( void );
 
 /**
  * @brief Atualiza os atributos do inimigo.

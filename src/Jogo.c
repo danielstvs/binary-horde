@@ -14,33 +14,21 @@
 Jogo *criarJogo( void ) {
 
     Jogo *jogo = (Jogo*) malloc( sizeof( Jogo ) );
-
-    jogo->jogador = criarJogador(
-        (Vector2) { 
-            GetScreenWidth() / 2.0f,
-            GetScreenHeight() / 2.0f 
-        },
-        (Vector2) { 0.0f, 0.0f },
-        (Vector2) { 32, 32 },
-        BLUE
-    );
-    
+    jogo->jogador = criarJogador();
+    jogo->camera = criarCamera();
     memset( jogo->inimigo, 0, sizeof( jogo->inimigo ) );
     jogo->qtdInimigosAtivos = 0;
-
-    jogo->camera = criarCamera( &jogo->jogador );
     jogo->velSuavidadeCamera = SUAVIDADE_CAMERA;
-    
     jogo->tempoDecorrido = 0.0f;
 
     return jogo;
 }
 
-Camera2D criarCamera( Jogador *jogador ) {
+Camera2D criarCamera( void ) {
     return (Camera2D){
-        .target = (Vector2){
-            jogador->posicao.x + ( jogador->dimensao.x / 2.0f ),
-            jogador->posicao.y + ( jogador->dimensao.y / 2.0f )
+        .target =  (Vector2){
+            GetScreenWidth() / 2.0f,
+            GetScreenHeight() / 2.0f,
         },
         .offset = (Vector2){
             GetScreenWidth() / 2.0f,
@@ -69,8 +57,6 @@ void percorerCriarInimigos(Jogo *jogo) {
   for (int i = 0; i < QTD_MAX_INIMIGOS; i++) {
     if ( !jogo->inimigo[i].ativo ) {
         jogo->inimigo[i] = criarInimigo(
-            (Vector2){ GetScreenWidth() - 30 - 10 * i, GetScreenHeight() - 30 - 10 * i},
-            (Vector2){0.0f, 0.0f}, 
             (Vector2){16, 16}, 
             RED
         );
@@ -106,14 +92,14 @@ void desenharJogo( Jogo *jogo ) {
     BeginDrawing();
     ClearBackground( WHITE );
 
-    // FUNÇÕES DE MENU AQUI!
+    // FUNÇÕES DE MENU AQUI !
 
     BeginMode2D(jogo->camera);
         desenharJogador( &jogo->jogador );
         percorrerDesenharInimigos( jogo );
     EndMode2D();
     
-    // Linhas para testes, depois tirar
+    // LINHAS SOMENTE PARA TESTES
     DrawLine(0, GetRenderHeight() / 2.0f, GetRenderWidth(), GetRenderHeight() / 2.0f, GREEN);
     DrawLine(GetRenderWidth() / 2.0f, 0, GetRenderWidth() / 2.0f, GetRenderHeight(), GREEN);
 

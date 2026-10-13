@@ -1,17 +1,16 @@
 #include "Jogador.h"
 #include "raymath.h"
 
-Jogador criarJogador( 
-    Vector2 posicao, 
-    Vector2 direcao, 
-    Vector2 dimensao, 
-    Color cor ) {
+Jogador criarJogador( void ) {
 
     return (Jogador) {
-        .posicao = posicao,
-        .direcao = direcao,
-        .dimensao = dimensao,
-        .cor = cor,
+        (Vector2) { 
+            GetScreenWidth() / 2.0f,
+            GetScreenHeight() / 2.0f 
+        },
+        Vector2Zero(),
+        (Vector2) { JOGADOR_TAM, JOGADOR_TAM },
+        BLUE,
         .velocidade = VELOCIDADE_INICIAL,
     };
 }
@@ -39,11 +38,9 @@ void atualizarJogador( Jogador *jogador, float delta )  {
 }
 
 void desenharJogador( Jogador *jogador ) {
-    DrawRectangle(
-        jogador->posicao.x,
-        jogador->posicao.y,
-        jogador->dimensao.x,
-        jogador->dimensao.y,
+    DrawRectangleV(
+        jogador->posicao,
+        jogador->dimensao,
         jogador->cor
     );
 }

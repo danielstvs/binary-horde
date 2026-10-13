@@ -2,6 +2,7 @@
 
 #include "raylib.h"
 
+#define JOGADOR_TAM 32
 #define VELOCIDADE_INICIAL 100
 
 typedef struct Jogador {
@@ -15,14 +16,9 @@ typedef struct Jogador {
 /**
  * @brief Cria a instância do jogador.
  * 
- * @param posicao       Coordenadas x e y do jogador.
- * @param direcao       Direção do jogador no eixo X e Y.
- * @param dimensao      Tamanho do jogador.
- * @param cor           Cor do jogador.
- * @param velocidade    Velocidade do movimento do jogador.
  * @return Retorna o elemento do tipo Jogador.
  */
-Jogador criarJogador( Vector2 posicao, Vector2 direcao, Vector2 dimensao, Color cor );
+Jogador criarJogador( void );
 
 /**
  * @brief Lê os comandos de movimento do jogador.

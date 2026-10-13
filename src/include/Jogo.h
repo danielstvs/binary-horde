@@ -9,9 +9,10 @@
 
 typedef struct Jogo {
     Jogador jogador;
-    Inimigo inimigo[QTD_MAX_INIMIGOS];
-    int qtdInimigosAtivos;
     Camera2D camera;
+    Inimigo inimigo[QTD_MAX_INIMIGOS];
+    
+    int qtdInimigosAtivos;
     float velSuavidadeCamera;
     float tempoDecorrido;       // Contador de tempo para fases
 } Jogo;
@@ -26,10 +27,9 @@ Jogo *criarJogo( void );
 /**
  * @brief Cria uma intância da câmera e inicializa seus atributos.
  * 
- * @param jogador Endereço jogador. 
  * @return Camera2D
  */
-Camera2D criarCamera( Jogador *jogador );
+Camera2D criarCamera( void );
 
 /**
  * @brief Move o foco da camera para seguir o centro do jogador. 
