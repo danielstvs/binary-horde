@@ -1,4 +1,5 @@
 #include "Inimigo.h"
+#include "Util.h"
 #include "raymath.h"
 
 Inimigo criarInimigo(
@@ -6,31 +7,13 @@ Inimigo criarInimigo(
     Color cor ) {
 
     return (Inimigo){
-        .posicao = calcularPosicao(),  
-        .direcao = Vector2Zero(),
+        .posicao = calcularPosicaoCircunferencia(),  
+    //    .direcao = Vector2Zero(),
         .dimensao = dimensao,
         .cor = cor,
         .velocidade = GetRandomValue( 5, 40 ),  // Adicionar variáveis para controle de velocidade MIN e MAX, ou adicionar  multiplicador ao gerar inimigos mais fortes.
         .ativo = true
     } ;
-}
-
-/**
- * Calcula o centro da tela, e, aleatóriamente, gera um valor de angulo em
- * radianos e um tamanho de raio. Retorna uma coordenada na circunferencia
- * calculada pela formula:
- *          X = x' + cos(angulo) * raio
- *          Y = y' + sen(angulo) * raio
- */
-Vector2 calcularPosicao( void ) {
-    Vector2 centroTela = (Vector2){GetScreenWidth() / 2, GetScreenHeight() / 2 };
-    float angulo = GetRandomValue( 0, 359 ) * DEG2RAD;
-    float raio = GetRandomValue( 700, 800 );    // CAUSARÁ PROBLEMAS CASO A TELA SEJA MAIOR QUE 1280x720.
-
-    return (Vector2) {
-        centroTela.x + cosf( angulo ) * raio,
-        centroTela.y + sinf( angulo ) * raio
-    };
 }
 
 /**

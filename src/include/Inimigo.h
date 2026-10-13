@@ -1,12 +1,12 @@
 #pragma once
 
-#include <stdbool.h>
 #include "Jogador.h"
 #include "raylib.h"
+#include <stdbool.h>
 
 typedef struct Inimigo {
     Vector2 posicao;
-    Vector2 direcao;    // CASO UTILIZAR A FUNÇÃO DA RAYLIB PARA MOVER PERSONAGEM, RETIRAR ESSE ATRIBUTO, POIS AINDA NÃO É UTILIZADO EM OUTRA FUNÇÃO.
+    //Vector2 direcao;    // CASO UTILIZAR A FUNÇÃO DA RAYLIB PARA MOVER PERSONAGEM, RETIRAR ESSE ATRIBUTO, POIS AINDA NÃO É UTILIZADO EM OUTRA FUNÇÃO.
     Vector2 dimensao;
     float velocidade;
     bool ativo;
@@ -21,13 +21,6 @@ typedef struct Inimigo {
  * @return Inimigo 
  */
 Inimigo criarInimigo( Vector2 dimensao, Color cor ); // DEVE RECEBER COMO PARAMETRO SOMENTE QUAL DEVERÁ SER O INIMIGO CRIADO
-
-/**
- * @brief Calcula uma posição aleatória fora da visão da câmera.
- * 
- * @return Vector2      Retorna um ponto (x,y) na circunferência.
- */
-Vector2 calcularPosicao( void );
 
 /**
  * @brief Atualiza os atributos do inimigo.
