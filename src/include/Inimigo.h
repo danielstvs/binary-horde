@@ -3,9 +3,6 @@
 #include <stdbool.h>
 #include "Jogador.h"
 #include "raylib.h"
-#include "stdlib.h"
-
-#define VELOCIDADE_INICIAL_INIMIGO 30
 
 typedef struct Inimigo {
     Vector2 posicao;
@@ -26,6 +23,15 @@ typedef struct Inimigo {
  * @return Inimigo 
  */
 Inimigo criarInimigo( Vector2 posicao, Vector2 direcao, Vector2 dimensao, Color cor );
+
+/**
+ * @brief Calcula uma posição aleatória fora da visão da câmera.
+ * 
+ * @param centroTela    A posição do centro da tela (x,y).
+ * @param raio          Metade da diagonal da tela.
+ * @return Vector2      Retorna um ponto (x,y) na circunferência.
+ */
+Vector2 calcularPosicao( Vector2 centroTela, float raio );
 
 /**
  * @brief Atualiza os atributos do inimigo.

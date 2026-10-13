@@ -8,13 +8,31 @@ Inimigo criarInimigo(
     Color cor ) {
 
     return (Inimigo){
-        .posicao = posicao,
+        .posicao = calcularPosicao( (Vector2){
+            GetScreenWidth() / 2, GetScreenHeight() / 2 },
+            GetRandomValue( 700, 800 ) ),   // Alterar o primeiro valor para uma variavel que calcula o raio a partir do centro da tela. Alterar o segundo valor para calcular jiter.
         .direcao = direcao,
         .dimensao = dimensao,
         .cor = cor,
-        .velocidade = VELOCIDADE_INICIAL_INIMIGO,
+        .velocidade = GetRandomValue( 5, 40 ),  // Adicionar variáveis para controle de velocidade MIN e MAX, ou adicionar  multiplicador ao gerar inimigos mais fortes.
         .ativo = true
     } ;
+}
+
+/**
+ * Gera um angulo aleatório em Radianos que é multiplicado pelo
+ * cosseno de x e pelo seno de y, e depois somado com os pontos
+ *  x e y respectivamente gerando coordenadas na circunferencia.
+ * 
+ * Formula: X = x' + cos(angulo) * raio
+ *          Y = y' + sen(angulo) * raio
+ */
+Vector2 calcularPosicao( Vector2 centroTela, float raio ) {
+    float angulo = GetRandomValue( 0, 359 ) * DEG2RAD;
+    return (Vector2) {
+        centroTela.x + cosf( angulo ) * raio,
+        centroTela.y + sinf( angulo ) * raio
+    };
 }
 
 /**
