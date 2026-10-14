@@ -14,7 +14,8 @@ Jogador criarJogador( void ) {
         (Vector2) { JOGADOR_TAM, JOGADOR_TAM },
         BLUE,
         .velocidade = VELOCIDADE_INICIAL,
-        .pontosVida = 100.0f
+        .pontosVida = 100.0f,
+        .tempoInvulneravel = 0.0f
     };
 }
 /**
@@ -41,13 +42,24 @@ void movimentarJogador( Jogador *jogador, float delta ) {
 }
 
 void calcDanoSofrido( Jogo *jogo ) {
-    if( checarColisaoJogador(&jogo->jogador, jogo->inimigo, jogo->qtdInimigosAtivos) )  {
-        jogo->jogador.pontosVida -= 10.0f;
-
+    if( jogo->jogador.tempoInvulneravel == 0.0f ) {
+        if( checarColisaoJogador(&jogo->jogador, jogo->inimigo, jogo->qtdInimigosAtivos) )  {
+            jogo->jogador.pontosVida -= 10.0f;
+            jogo->jogador.tempoInvulneravel = 1.0f;
+            //  JOGA O JOGADOR PARA TRAZ QUANDO TOMA DANO. DEPOIS TROCAR PARA UMA FUNÇÃO
+            jogo->jogador.posicao = Vector2Add(jogo->jogador.posicao,Vector2Scale(jogo->jogador.direcao, -30)); 
+        }
     }
 }
 
 void atualizarJogador( Jogo *jogo, float delta )  {
+    // CALCULO DE TEMPO DE INVULNERABILIDADE AO TOMAR DANO
+    if( jogo->jogador.tempoInvulneravel > 0.0f ) {
+        jogo->jogador.tempoInvulneravel -= delta;
+    }
+    if( jogo->jogador.tempoInvulneravel < 0.0f ) {
+        jogo->jogador.tempoInvulneravel = 0.0f;
+    }    
     movimentarJogador( &jogo->jogador, delta);
     calcDanoSofrido( jogo );
 }

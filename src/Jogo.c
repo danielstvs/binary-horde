@@ -53,6 +53,12 @@ void desenharJogo( Jogo *jogo ) {
     EndMode2D();
 
 // LINHAS SOMENTE PARA TESTES
+    for(int i = 0; i < 16; i++ ){ //  linhas
+        for(int j = 0; j < 9; j++ ){  // colunas
+            DrawLine(0, j * 80, GetRenderWidth(), j * 80, GREEN); //  linha
+            DrawLine(i * 80, 0, i * 80, GetRenderHeight(), GREEN);// coluna
+        }
+    }
     DrawText(
         TextFormat( "Tempo: %.2f s\n"
                 "Inimigos: %d\n"
@@ -67,12 +73,6 @@ void desenharJogo( Jogo *jogo ) {
         20,
         BLACK
     );
-    for(int i = 0; i < 16; i++ ){ //  linhas
-        for(int j = 0; j < 9; j++ ){  // colunas
-            DrawLine(0, j * 80, GetRenderWidth(), j * 80, GREEN); //  linha
-            DrawLine(i * 80, 0, i * 80, GetRenderHeight(), GREEN);// coluna
-        }
-    }
     //DrawLine(0, GetRenderHeight() / 2.0f, GetRenderWidth(), GetRenderHeight() / 2.0f, GREEN);
     //DrawLine(GetRenderWidth() / 2.0f, 0, GetRenderWidth() / 2.0f, GetRenderHeight(), GREEN);
 

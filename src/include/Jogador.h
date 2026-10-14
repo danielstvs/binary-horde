@@ -16,6 +16,7 @@ typedef struct Jogador {
     Color cor;
     float velocidade;
     float pontosVida;
+    float tempoInvulneravel;
 } Jogador;
 
 /**
