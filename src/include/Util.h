@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Inimigo.h"
 #include "raylib.h"
 #include "raymath.h"
 
@@ -10,3 +11,5 @@
  * @return Vector2      Retorna um ponto (x,y) na circunferência.
  */
 Vector2 calcularPosicaoCircunferencia( void );
+
+void agruparInicioVetor( Inimigo *inimigo, int quantidadeVivos);

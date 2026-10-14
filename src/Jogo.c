@@ -22,6 +22,7 @@ Jogo *criarJogo( void ) {
     jogo->camera = criarCamera();
     memset( jogo->inimigo, 0, sizeof( jogo->inimigo ) );
     jogo->qtdInimigosAtivos = 0;
+    jogo->acumuladorNascInimigos = 0.0f;
     jogo->velSuavidadeCamera = 8.0f;
     jogo->tempoDecorrido = 0.0f;
 
@@ -29,7 +30,10 @@ Jogo *criarJogo( void ) {
 }
 
 void atualizarJogo( Jogo *jogo, float delta ) {
-    criaInimigosAtivos( jogo );
+    jogo->tempoDecorrido = GetTime();
+    jogo->acumuladorNascInimigos += TAXA_POR_SEGUNDO * delta;
+    
+    gerenciarNascInimigos( jogo );
     processarEntradaJogador( &jogo->jogador );
     atualizarJogador( &jogo->jogador, delta);
     atualizaInimigosAtivos( jogo, delta);
@@ -37,7 +41,7 @@ void atualizarJogo( Jogo *jogo, float delta ) {
 }
 
 void desenharJogo( Jogo *jogo ) {
-
+    
     BeginDrawing();
     ClearBackground( WHITE );
 
@@ -47,8 +51,16 @@ void desenharJogo( Jogo *jogo ) {
         desenharJogador( &jogo->jogador );
         desenhaInimigosAtivos( jogo );
     EndMode2D();
-    
-    // LINHAS SOMENTE PARA TESTES
+
+// LINHAS SOMENTE PARA TESTES
+    DrawText(
+        TextFormat( "Tempo: %.2f s\n\n   Inimigos: %d",
+            jogo->tempoDecorrido, jogo->qtdInimigosAtivos),
+        GetScreenWidth() / 2 - 75,
+        20,
+        20,
+        BLACK
+    );
     DrawLine(0, GetRenderHeight() / 2.0f, GetRenderWidth(), GetRenderHeight() / 2.0f, GREEN);
     DrawLine(GetRenderWidth() / 2.0f, 0, GetRenderWidth() / 2.0f, GetRenderHeight(), GREEN);
 

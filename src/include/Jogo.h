@@ -4,7 +4,8 @@
 #include "Jogador.h"
 #include "raylib.h"
 
-#define QTD_MAX_INIMIGOS 50
+#define QTD_MAX_INIMIGOS 500
+#define TAXA_POR_SEGUNDO 2.65f
 
 typedef struct Jogo {
     Jogador jogador;
@@ -12,8 +13,9 @@ typedef struct Jogo {
     Inimigo inimigo[QTD_MAX_INIMIGOS];
     
     int qtdInimigosAtivos;
+    float acumuladorNascInimigos;
     float velSuavidadeCamera;
-    float tempoDecorrido;       // Contador de tempo para fases
+    float tempoDecorrido;
 } Jogo;
 
 /**

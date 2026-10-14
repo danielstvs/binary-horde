@@ -17,3 +17,8 @@ Vector2 calcularPosicaoCircunferencia( void ) {
         centroTela.y + sinf( angulo ) * raio
     };
 }
+
+void agruparInicioVetor( Inimigo *inimigo, int quantidadeVivos) {
+    // SWAP-AND-POP
+    // VALIDO QUANDO PRECISAR ELIMINAR INIMIGOS 
+}

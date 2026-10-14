@@ -3,11 +3,14 @@
 #include "Jogo.h"
 
 /**
- * @brief Percorre o array até o fim e cria inimigos.
+ * @brief Verifica se o acumulador de inimigos a serem spawnados é
+ * maior que 1 e se a quantidade de inimigos ativos é menor que a
+ * quantidade máxima suportada. Se verdadeiro, insere a quantidade
+ * inteira do acumulador por meio de um loop, e atualiza as variáveis.
  * 
  * @param jogo 
  */
-void criaInimigosAtivos(Jogo *jogo);
+void gerenciarNascInimigos( Jogo *jogo );
 
 /**
  * @brief Percorre o array até o fim e atualiza os inimigos ativos.
