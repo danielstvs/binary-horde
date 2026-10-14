@@ -10,6 +10,6 @@
  * 
  * @return Vector2      Retorna um ponto (x,y) na circunferência.
  */
-Vector2 calcularPosicaoCircunferencia( void );
+Vector2 calcularPosicaoCircunferencia( Vector2 posAtualJogador );
 
 void agruparInicioVetor( Inimigo *inimigo, int quantidadeVivos);

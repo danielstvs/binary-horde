@@ -20,7 +20,7 @@ typedef struct Inimigo {
  * @param cor       Cor do inimigo.
  * @return Inimigo 
  */
-Inimigo criarInimigo( Vector2 dimensao, Color cor ); // DEVE RECEBER COMO PARAMETRO SOMENTE QUAL DEVERÁ SER O INIMIGO CRIADO
+Inimigo criarInimigo( Vector2 dimensao, Vector2 posicaoJogador, Color cor ); // DEVE RECEBER COMO PARAMETRO SOMENTE QUAL DEVERÁ SER O INIMIGO CRIADO
 
 /**
  * @brief Atualiza os atributos do inimigo.

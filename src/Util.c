@@ -1,4 +1,5 @@
 #include "Util.h"
+#include "Jogador.h"
 
 /**
  * Calcula o centro da tela, e, aleatóriamente, gera um valor de angulo em
@@ -7,10 +8,16 @@
  *          X = x' + cos(angulo) * raio
  *          Y = y' + sen(angulo) * raio
  */
-Vector2 calcularPosicaoCircunferencia( void ) {
-    Vector2 centroTela = (Vector2){GetScreenWidth() / 2, GetScreenHeight() / 2 };
+Vector2 calcularPosicaoCircunferencia( Vector2 posAtualJogador ) {
+    Vector2 centroTela = posAtualJogador;
     float angulo = GetRandomValue( 0, 359 ) * DEG2RAD;
-    float raio = GetRandomValue( 1470, 1550 );    // CAUSARÁ PROBLEMAS CASO A TELA SEJA MAIOR QUE 1280x720.
+    float raio = 1470.0f;   // CAUSARÁ PROBLEMAS CASO A TELA SEJA MAIOR QUE 1280x720.
+    // AO COLOCAR O RAIO DE 1470px OS INIMIGOS DEMORAM ~= 20s PARA APARECER NA TELA,
+    // PENSAR EM UMA SOLUÇÃO QUE, A PARTIR DO TEMPO, CHAMA EVENTOS NO MAPA ( GERA CHEFES, ITENS DE CURA, EVENTOS ALEATÓRIOS).
+    // POR HORA, TESTAR SE O TEMPO DE JOGO É MENOR QUE 15s TEM RESOLVIDO. VERIFICAR DEPOIS.
+    if ( GetTime() < 15.0f ){
+        raio = GetRandomValue( 700, 710 );
+    }
 
     return (Vector2) {
         centroTela.x + cosf( angulo ) * raio,

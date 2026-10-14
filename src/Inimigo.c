@@ -4,10 +4,11 @@
 
 Inimigo criarInimigo(
     Vector2 dimensao, 
+    Vector2 posicaoJogador,
     Color cor ) {
 
     return (Inimigo){
-        .posicao = calcularPosicaoCircunferencia(),  
+        .posicao = calcularPosicaoCircunferencia( posicaoJogador ),  
     //    .direcao = Vector2Zero(),
         .dimensao = dimensao,
         .cor = cor,

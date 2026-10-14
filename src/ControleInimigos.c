@@ -4,7 +4,7 @@ void gerenciarNascInimigos( Jogo *jogo ) {
     while( jogo->acumuladorNascInimigos >= 1.0f && 
             jogo->qtdInimigosAtivos < QTD_MAX_INIMIGOS ) {
         jogo->inimigo[jogo->qtdInimigosAtivos] = criarInimigo( 
-            (Vector2){ 16, 16 }, RED );
+            (Vector2){ 16, 16 }, jogo->jogador.posicao, RED );
         jogo->qtdInimigosAtivos += 1;
         jogo->acumuladorNascInimigos -= 1.0f;
     }
