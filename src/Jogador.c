@@ -64,10 +64,24 @@ void atualizarJogador( Jogo *jogo, float delta )  {
     calcDanoSofrido( jogo );
 }
 
+void desenharPV( Jogador *jogador ) {
+    DrawRectangleV(
+        (Vector2){jogador->posicao.x, jogador->posicao.y + JOGADOR_TAM + 5},
+        (Vector2){jogador->dimensao.x, 5.0f },
+        RED
+    );
+    DrawRectangleV(
+        (Vector2){jogador->posicao.x, jogador->posicao.y + JOGADOR_TAM + 5},
+        (Vector2){jogador->dimensao.x * jogador->pontosVida / 100.0f, 5.0f },
+        GREEN
+    );
+}
+
 void desenharJogador( Jogador *jogador ) {
     DrawRectangleV(
         jogador->posicao,
         jogador->dimensao,
         jogador->cor
     );
+    desenharPV(jogador);
 }

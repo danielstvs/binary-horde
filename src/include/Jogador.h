@@ -44,6 +44,7 @@ void calcDanoSofrido( Jogo *jogo );
  */
 void atualizarJogador( Jogo *jogo, float delta );
 
+void desenharPV( Jogador *jogador );
 
 /**
  * @brief Desenha o jogador na tela.

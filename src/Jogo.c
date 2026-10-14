@@ -38,6 +38,10 @@ void atualizarJogo( Jogo *jogo, float delta ) {
     atualizarJogador( jogo, delta);
     atualizaInimigosAtivos( jogo, delta);
     moverCamera( &jogo->camera, &jogo->jogador, jogo->velSuavidadeCamera, delta);
+
+    if( jogo->jogador.pontosVida <= 0.0f){
+        // tela de morte
+    }
 }
 
 void desenharJogo( Jogo *jogo ) {
