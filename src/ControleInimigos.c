@@ -11,14 +11,14 @@ void gerenciarNascInimigos( Jogo *jogo ) {
 }
 
 void atualizaInimigosAtivos( Jogo *jogo, float delta ) {
-    for ( int i = 0; i < QTD_MAX_INIMIGOS; i++ ) {
+    for ( int i = 0; i < jogo->qtdInimigosAtivos; i++ ) {
         if ( jogo->inimigo[i].ativo )
             atualizarInimigo( &jogo->inimigo[i], &jogo->jogador, delta ); 
     }
 }
 
 void desenhaInimigosAtivos( Jogo *jogo ) {
-    for ( int i = 0; i < QTD_MAX_INIMIGOS; i++ ) {
+    for ( int i = 0; i < jogo->qtdInimigosAtivos; i++ ) {
         if ( jogo->inimigo[i].ativo )
             desenharInimigo( &jogo->inimigo[i] );
     }

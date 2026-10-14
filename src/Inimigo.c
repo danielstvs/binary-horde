@@ -11,7 +11,7 @@ Inimigo criarInimigo(
     //    .direcao = Vector2Zero(),
         .dimensao = dimensao,
         .cor = cor,
-        .velocidade = GetRandomValue( 5, 40 ),  // Adicionar variáveis para controle de velocidade MIN e MAX, ou adicionar  multiplicador ao gerar inimigos mais fortes.
+        .velocidade = GetRandomValue( 7, 50 ),  // Adicionar variáveis para controle de velocidade MIN e MAX, ou adicionar  multiplicador ao gerar inimigos mais fortes.
         .ativo = true
     } ;
 }

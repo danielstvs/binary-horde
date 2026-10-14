@@ -3,7 +3,7 @@
 #include "raylib.h"
 
 #define JOGADOR_TAM 32
-#define VELOCIDADE_INICIAL 100
+#define VELOCIDADE_INICIAL 150
 
 typedef struct Jogador {
     Vector2 posicao;

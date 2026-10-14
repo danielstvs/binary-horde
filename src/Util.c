@@ -10,7 +10,7 @@
 Vector2 calcularPosicaoCircunferencia( void ) {
     Vector2 centroTela = (Vector2){GetScreenWidth() / 2, GetScreenHeight() / 2 };
     float angulo = GetRandomValue( 0, 359 ) * DEG2RAD;
-    float raio = GetRandomValue( 700, 800 );    // CAUSARÁ PROBLEMAS CASO A TELA SEJA MAIOR QUE 1280x720.
+    float raio = GetRandomValue( 1470, 1550 );    // CAUSARÁ PROBLEMAS CASO A TELA SEJA MAIOR QUE 1280x720.
 
     return (Vector2) {
         centroTela.x + cosf( angulo ) * raio,
