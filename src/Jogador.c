@@ -1,4 +1,6 @@
 #include "Jogador.h"
+#include "ControleColisoes.h"
+#include "Jogo.h"
 #include "raymath.h"
 
 Jogador criarJogador( void ) {
@@ -12,6 +14,7 @@ Jogador criarJogador( void ) {
         (Vector2) { JOGADOR_TAM, JOGADOR_TAM },
         BLUE,
         .velocidade = VELOCIDADE_INICIAL,
+        .pontosVida = 100.0f
     };
 }
 /**
@@ -32,9 +35,21 @@ void processarEntradaJogador( Jogador *jogador ) {
     jogador->direcao = Vector2Normalize( jogador->direcao );
 }
 
-void atualizarJogador( Jogador *jogador, float delta )  {
+void movimentarJogador( Jogador *jogador, float delta ) {
     jogador->posicao.x += jogador->direcao.x * jogador->velocidade * delta;
     jogador->posicao.y += jogador->direcao.y * jogador->velocidade * delta;
+}
+
+void calcDanoSofrido( Jogo *jogo ) {
+    if( checarColisaoJogador(&jogo->jogador, jogo->inimigo, jogo->qtdInimigosAtivos) )  {
+        jogo->jogador.pontosVida -= 10.0f;
+
+    }
+}
+
+void atualizarJogador( Jogo *jogo, float delta )  {
+    movimentarJogador( &jogo->jogador, delta);
+    calcDanoSofrido( jogo );
 }
 
 void desenharJogador( Jogador *jogador ) {

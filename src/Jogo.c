@@ -35,7 +35,7 @@ void atualizarJogo( Jogo *jogo, float delta ) {
     
     gerenciarNascInimigos( jogo );
     processarEntradaJogador( &jogo->jogador );
-    atualizarJogador( &jogo->jogador, delta);
+    atualizarJogador( jogo, delta);
     atualizaInimigosAtivos( jogo, delta);
     moverCamera( &jogo->camera, &jogo->jogador, jogo->velSuavidadeCamera, delta);
 }
@@ -54,15 +54,27 @@ void desenharJogo( Jogo *jogo ) {
 
 // LINHAS SOMENTE PARA TESTES
     DrawText(
-        TextFormat( "Tempo: %.2f s\n\n   Inimigos: %d",
-            jogo->tempoDecorrido, jogo->qtdInimigosAtivos),
-        GetScreenWidth() / 2 - 75,
+        TextFormat( "Tempo: %.2f s\n"
+                "Inimigos: %d\n"
+                "Jogador: \nX = %.1f\nY = %.1f\n"
+                "PV %.1f",
+                jogo->tempoDecorrido,
+                jogo->qtdInimigosAtivos,
+                jogo->jogador.posicao.x, jogo->jogador.posicao.y,
+                jogo->jogador.pontosVida),
+        GetScreenWidth() - 200,
         20,
         20,
         BLACK
     );
-    DrawLine(0, GetRenderHeight() / 2.0f, GetRenderWidth(), GetRenderHeight() / 2.0f, GREEN);
-    DrawLine(GetRenderWidth() / 2.0f, 0, GetRenderWidth() / 2.0f, GetRenderHeight(), GREEN);
+    for(int i = 0; i < 16; i++ ){ //  linhas
+        for(int j = 0; j < 9; j++ ){  // colunas
+            DrawLine(0, j * 80, GetRenderWidth(), j * 80, GREEN); //  linha
+            DrawLine(i * 80, 0, i * 80, GetRenderHeight(), GREEN);// coluna
+        }
+    }
+    //DrawLine(0, GetRenderHeight() / 2.0f, GetRenderWidth(), GetRenderHeight() / 2.0f, GREEN);
+    //DrawLine(GetRenderWidth() / 2.0f, 0, GetRenderWidth() / 2.0f, GetRenderHeight(), GREEN);
 
     DrawFPS( 5, 5 );
 

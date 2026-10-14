@@ -2,10 +2,11 @@
 
 #include "Inimigo.h"
 #include "Jogador.h"
+#include "ControleColisoes.h"
 #include "raylib.h"
 
 #define QTD_MAX_INIMIGOS 500
-#define TAXA_POR_SEGUNDO 2.65f
+#define TAXA_POR_SEGUNDO 1.5f
 
 typedef struct Jogo {
     Jogador jogador;
