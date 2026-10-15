@@ -2,7 +2,7 @@
 
 #include "raylib.h"
 
-typedef struct Jogo Jogo;  //forward declaration.
+typedef struct Jogo Jogo;   //forward declaration.
 //  Estava causando problemas de inclusão circulares
 //  RESOLVER DEPOIS !!
 

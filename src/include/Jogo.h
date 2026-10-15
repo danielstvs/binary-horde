@@ -2,7 +2,6 @@
 
 #include "Inimigo.h"
 #include "Jogador.h"
-#include "ControleColisoes.h"
 #include "raylib.h"
 
 #define QTD_MAX_INIMIGOS 5000

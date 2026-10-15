@@ -1,12 +1,9 @@
 #include "Janela.h"
-#include "Jogo.h"
-#include "Inimigo.h"
 #include "Recursos.h"
 
 #include "raylib.h"
 
 #include <stdlib.h>
-#include <stdbool.h>
 
 /**
  * @brief Cria uma instância da struct Janela alocada dinamicamente.

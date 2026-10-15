@@ -1,4 +1,5 @@
 #include "Inimigo.h"
+#include "Jogador.h"
 #include "Util.h"
 #include "raymath.h"
 

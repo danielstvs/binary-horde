@@ -23,5 +23,5 @@ bool checarColisaoJogador( Jogador *jogador, Inimigo *inimigos, int qtdAtivos ) 
             return true;
         }
     }
+    return false;
 }
-

@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Jogador.h"
 #include "raylib.h"
 #include <stdbool.h>
+
+typedef struct Jogador Jogador;
 
 typedef struct Inimigo {
     Vector2 posicao;

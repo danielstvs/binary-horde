@@ -10,15 +10,15 @@
 #define ESPACO_VAZIO 6 // Usado para o espaço entre o personagem e a barra de PV.
 
 Jogador criarJogador( void ) {
-
-    return (Jogador) {
-        (Vector2) { 
+    return (Jogador){
+        .posicao = (Vector2){ 
             GetScreenWidth() / 2.0f,
             GetScreenHeight() / 2.0f 
         },
-        Vector2Zero(),
-        (Vector2) { TAM_JOGADOR, TAM_JOGADOR },
-        BLUE,
+        .direcao = Vector2Zero(),
+        .dimensao = (Vector2){ 
+            TAM_JOGADOR, TAM_JOGADOR },
+        .cor = BLUE,
         .velocidade = VELOCIDADE_INICIAL,
         .pontosVida = PV_INICIAL,
         .tempoInvulneravel = 0.0f
