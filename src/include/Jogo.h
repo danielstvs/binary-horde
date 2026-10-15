@@ -5,8 +5,8 @@
 #include "ControleColisoes.h"
 #include "raylib.h"
 
-#define QTD_MAX_INIMIGOS 500
-#define TAXA_POR_SEGUNDO 1.5f
+#define QTD_MAX_INIMIGOS 5000
+#define TAXA_POR_SEGUNDO 5.75f
 
 typedef struct Jogo {
     Jogador jogador;

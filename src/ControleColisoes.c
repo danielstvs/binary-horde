@@ -5,7 +5,7 @@ void gerarHashGrid( int largura, int altura ) {
 
 }
 
-bool checarColisaoJogador( Jogador *jogador, Inimigo inimigos[], int qtdAtivos ) {
+bool checarColisaoJogador( Jogador *jogador, Inimigo *inimigos, int qtdAtivos ) {
     for( int x = 0; x < qtdAtivos; x++ ) {
         if ( CheckCollisionRecs(
             (Rectangle){
@@ -19,8 +19,7 @@ bool checarColisaoJogador( Jogador *jogador, Inimigo inimigos[], int qtdAtivos )
                 inimigos[x].posicao.y,
                 inimigos[x].dimensao.x,
                 inimigos[x].dimensao.y
-            }
-        ) ){
+            }) ){
             return true;
         }
     }

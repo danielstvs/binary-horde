@@ -6,7 +6,6 @@
 
 typedef struct Inimigo {
     Vector2 posicao;
-    //Vector2 direcao;    // CASO UTILIZAR A FUNÇÃO DA RAYLIB PARA MOVER PERSONAGEM, RETIRAR ESSE ATRIBUTO, POIS AINDA NÃO É UTILIZADO EM OUTRA FUNÇÃO.
     Vector2 dimensao;
     float velocidade;
     bool ativo;
@@ -20,7 +19,7 @@ typedef struct Inimigo {
  * @param cor       Cor do inimigo.
  * @return Inimigo 
  */
-Inimigo criarInimigo( Vector2 dimensao, Vector2 posicaoJogador, Color cor ); // DEVE RECEBER COMO PARAMETRO SOMENTE QUAL DEVERÁ SER O INIMIGO CRIADO
+Inimigo criarInimigo( Vector2 dimensao, Vector2 posicaoJogador, float velocidade, Color cor ); // A FUNÇÃO DE CONTROLE DE INIMIGOS DEVE INFORMAR QUAIS PARAMETROS PARA GERAR O TIPO DE ININMIGO DE ACORDO COM A DIFICULDADE.
 
 /**
  * @brief Atualiza os atributos do inimigo.

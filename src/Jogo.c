@@ -57,31 +57,33 @@ void desenharJogo( Jogo *jogo ) {
     EndMode2D();
 
 // LINHAS SOMENTE PARA TESTES
-    for(int i = 0; i < 16; i++ ){ //  linhas
-        for(int j = 0; j < 9; j++ ){  // colunas
-            DrawLine(0, j * 80, GetRenderWidth(), j * 80, GREEN); //  linha
-            DrawLine(i * 80, 0, i * 80, GetRenderHeight(), GREEN);// coluna
+    for(int i = 0; i < 7; i++ ){ //  linhas
+        for(int j = 0; j < 5; j++ ){  // colunas
+            DrawLine(0, j * 144, GetRenderWidth(), j * 144, GREEN); //  linha
+            DrawLine(i * 182.8574, 0, i * 182.8574, GetRenderHeight(), GREEN);// coluna
         }
     }
     DrawText(
         TextFormat( "Tempo: %.2f s\n"
                 "Inimigos: %d\n"
                 "Jogador: \nX = %.1f\nY = %.1f\n"
-                "PV %.1f",
+                "PV %.1f\n",
                 jogo->tempoDecorrido,
                 jogo->qtdInimigosAtivos,
                 jogo->jogador.posicao.x, jogo->jogador.posicao.y,
                 jogo->jogador.pontosVida),
         GetScreenWidth() - 200,
-        20,
+        5,
         20,
         BLACK
     );
+    DrawText(TextFormat("%.2f",GetFrameTime() * 1000),100,20,20,BLACK);
     //DrawLine(0, GetRenderHeight() / 2.0f, GetRenderWidth(), GetRenderHeight() / 2.0f, GREEN);
     //DrawLine(GetRenderWidth() / 2.0f, 0, GetRenderWidth() / 2.0f, GetRenderHeight(), GREEN);
 
     DrawFPS( 5, 5 );
-
+    
+    
     EndDrawing();
 
 }

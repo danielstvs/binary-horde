@@ -1,10 +1,14 @@
 #include "ControleInimigos.h"
 
+#define TAM_INIMIGO 32
+#define VEL_INIMIGO 50.0f
+
 void gerenciarNascInimigos( Jogo *jogo ) {
     while( jogo->acumuladorNascInimigos >= 1.0f && 
             jogo->qtdInimigosAtivos < QTD_MAX_INIMIGOS ) {
-        jogo->inimigo[jogo->qtdInimigosAtivos] = criarInimigo( 
-            (Vector2){ 16, 16 }, jogo->jogador.posicao, RED );
+        
+                jogo->inimigo[jogo->qtdInimigosAtivos] = criarInimigo( // CRIAR FUNÇÃO QUE GERENCIA OS ATRIBUTOS DOS INIMIGOS A SEREM GERADOS DE ACORDO COM O AUMENTO DE DIFICULDADE.
+            (Vector2){ TAM_INIMIGO, TAM_INIMIGO }, jogo->jogador.posicao, VEL_INIMIGO, RED );
         jogo->qtdInimigosAtivos += 1;
         jogo->acumuladorNascInimigos -= 1.0f;
     }

@@ -3,6 +3,12 @@
 #include "Jogo.h"
 #include "raymath.h"
 
+#define TAM_JOGADOR 48
+#define VELOCIDADE_INICIAL 150
+#define PV_INICIAL 100.0f
+
+#define ESPACO_VAZIO 6 // Usado para o espaço entre o personagem e a barra de PV.
+
 Jogador criarJogador( void ) {
 
     return (Jogador) {
@@ -11,10 +17,10 @@ Jogador criarJogador( void ) {
             GetScreenHeight() / 2.0f 
         },
         Vector2Zero(),
-        (Vector2) { JOGADOR_TAM, JOGADOR_TAM },
+        (Vector2) { TAM_JOGADOR, TAM_JOGADOR },
         BLUE,
         .velocidade = VELOCIDADE_INICIAL,
-        .pontosVida = 100.0f,
+        .pontosVida = PV_INICIAL,
         .tempoInvulneravel = 0.0f
     };
 }
@@ -41,7 +47,14 @@ void movimentarJogador( Jogador *jogador, float delta ) {
     jogador->posicao.y += jogador->direcao.y * jogador->velocidade * delta;
 }
 
-void calcDanoSofrido( Jogo *jogo ) {
+void verificarColisaoJogador( Jogo *jogo, float delta ) {
+    // CALCULO DE TEMPO DE INVULNERABILIDADE AO TOMAR DANO
+    if( jogo->jogador.tempoInvulneravel > 0.0f ) {
+        jogo->jogador.tempoInvulneravel -= delta;
+    }
+    if( jogo->jogador.tempoInvulneravel < 0.0f ) {
+        jogo->jogador.tempoInvulneravel = 0.0f;
+    }  
     if( jogo->jogador.tempoInvulneravel == 0.0f ) {
         if( checarColisaoJogador(&jogo->jogador, jogo->inimigo, jogo->qtdInimigosAtivos) )  {
             jogo->jogador.pontosVida -= 10.0f;
@@ -52,27 +65,22 @@ void calcDanoSofrido( Jogo *jogo ) {
     }
 }
 
-void atualizarJogador( Jogo *jogo, float delta )  {
-    // CALCULO DE TEMPO DE INVULNERABILIDADE AO TOMAR DANO
-    if( jogo->jogador.tempoInvulneravel > 0.0f ) {
-        jogo->jogador.tempoInvulneravel -= delta;
-    }
-    if( jogo->jogador.tempoInvulneravel < 0.0f ) {
-        jogo->jogador.tempoInvulneravel = 0.0f;
-    }    
+void atualizarJogador( Jogo *jogo, float delta )  {  
     movimentarJogador( &jogo->jogador, delta);
-    calcDanoSofrido( jogo );
+    verificarColisaoJogador( jogo, delta );
 }
 
 void desenharPV( Jogador *jogador ) {
     DrawRectangleV(
-        (Vector2){jogador->posicao.x, jogador->posicao.y + JOGADOR_TAM + 5},
-        (Vector2){jogador->dimensao.x, 5.0f },
+        (Vector2){ jogador->posicao.x,
+            jogador->posicao.y + jogador->dimensao.y + ESPACO_VAZIO },
+        (Vector2){ jogador->dimensao.x, ESPACO_VAZIO },
         RED
     );
     DrawRectangleV(
-        (Vector2){jogador->posicao.x, jogador->posicao.y + JOGADOR_TAM + 5},
-        (Vector2){jogador->dimensao.x * jogador->pontosVida / 100.0f, 5.0f },
+        (Vector2){ jogador->posicao.x,
+            jogador->posicao.y + jogador->dimensao.y + ESPACO_VAZIO },
+        (Vector2){ jogador->dimensao.x * jogador->pontosVida / 100.0f, ESPACO_VAZIO },
         GREEN
     );
 }

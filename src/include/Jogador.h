@@ -2,9 +2,6 @@
 
 #include "raylib.h"
 
-#define JOGADOR_TAM 32
-#define VELOCIDADE_INICIAL 150
-
 typedef struct Jogo Jogo;  //forward declaration.
 //  Estava causando problemas de inclusão circulares
 //  RESOLVER DEPOIS !!
@@ -34,7 +31,7 @@ void processarEntradaJogador( Jogador *jogador );
 
 void movimentarJogador( Jogador *jogador, float delta );
 
-void calcDanoSofrido( Jogo *jogo );
+void verificarColisaoJogador( Jogo *jogo, float delta );
 
 /**
  * @brief Atualiza os atributos do jogador.

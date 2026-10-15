@@ -4,7 +4,8 @@
 #include "Inimigo.h"
 #include "raylib.h"
 
-#define TAMANHO_GRID 64
+#define LARGURA_CEL_GRID 144.0f
+#define ALTURA_CEL_GRID 182.8571f
 
 typedef struct CelulaGrid {
     Vector2 posicao[20];
@@ -13,7 +14,7 @@ typedef struct CelulaGrid {
 } CelulaGrid;
 
 typedef struct HashGrid {
-    CelulaGrid matrizTabela[16][16];
+    CelulaGrid matrizTabela[5][7];
 } HashGrid;
 
 //bool checarColisao(  );

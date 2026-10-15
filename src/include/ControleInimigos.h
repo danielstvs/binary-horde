@@ -13,7 +13,8 @@
 void gerenciarNascInimigos( Jogo *jogo );
 
 /**
- * @brief Percorre o array até o fim e atualiza os inimigos ativos.
+ * @brief Percorre o array até indice[QuantidadeInimigosAtivos] e
+ * atualiza os inimigos ativos.
  * 
  * @param jogo 
  * @param delta 
@@ -21,7 +22,8 @@ void gerenciarNascInimigos( Jogo *jogo );
 void atualizaInimigosAtivos( Jogo *jogo, float delta );
 
 /**
- * @brief Percorre o array até o fim e desenha inimigos ativos.
+ * @brief Percorre o array até indice[QuantidadeInimigosAtivos] e
+ * desenha os inimigos ativos.
  * 
  * @param jogo 
  */
