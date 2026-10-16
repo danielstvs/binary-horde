@@ -6,6 +6,7 @@
 typedef struct Jogador Jogador;
 
 typedef struct Inimigo {
+    int idInimigo;
     Vector2 posicao;
     Vector2 dimensao;
     float velocidade;

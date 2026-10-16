@@ -6,11 +6,15 @@
 #define TAM_JOGADOR 48
 #define VELOCIDADE_INICIAL 150
 #define PV_INICIAL 100.0f
+#define TEMP_INVULNERAVEL 1.0f
 
 #define ESPACO_VAZIO 6 // Usado para o espaço entre o personagem e a barra de PV.
 
 Jogador criarJogador( void ) {
     return (Jogador){
+        .armas = {
+            [0] = inicializarArma( ARMA_TREM ),
+        },
         .posicao = (Vector2){ 
             GetScreenWidth() / 2.0f,
             GetScreenHeight() / 2.0f 
@@ -19,9 +23,10 @@ Jogador criarJogador( void ) {
         .dimensao = (Vector2){ 
             TAM_JOGADOR, TAM_JOGADOR },
         .cor = BLUE,
+        .qtdArmasAtivas = 1,
         .velocidade = VELOCIDADE_INICIAL,
         .pontosVida = PV_INICIAL,
-        .tempoInvulneravel = 0.0f
+        .tempoInvulneravel = 0.0f,
     };
 }
 /**
@@ -48,20 +53,12 @@ void movimentarJogador( Jogador *jogador, float delta ) {
 }
 
 void verificarColisaoJogador( Jogo *jogo, float delta ) {
-    // CALCULO DE TEMPO DE INVULNERABILIDADE AO TOMAR DANO
     if( jogo->jogador.tempoInvulneravel > 0.0f ) {
         jogo->jogador.tempoInvulneravel -= delta;
-    }
-    if( jogo->jogador.tempoInvulneravel < 0.0f ) {
-        jogo->jogador.tempoInvulneravel = 0.0f;
-    }  
-    if( jogo->jogador.tempoInvulneravel == 0.0f ) {
-        if( checarColisaoJogador(&jogo->jogador, jogo->inimigo, jogo->qtdInimigosAtivos) )  {
-            jogo->jogador.pontosVida -= 10.0f;
-            jogo->jogador.tempoInvulneravel = 1.0f;
-            //  JOGA O JOGADOR PARA TRAZ QUANDO TOMA DANO. DEPOIS TROCAR PARA UMA FUNÇÃO
-            jogo->jogador.posicao = Vector2Add(jogo->jogador.posicao,Vector2Scale(jogo->jogador.direcao, -30)); 
-        }
+    } else if( checarColisaoJogador(&jogo->jogador, jogo->inimigo, jogo->qtdInimigosAtivos) ) {
+        jogo->jogador.pontosVida -= 10.0f; // CALCULAR DANO INIMIGO
+        jogo->jogador.tempoInvulneravel = TEMP_INVULNERAVEL;
+        jogo->jogador.posicao = Vector2Add(jogo->jogador.posicao,Vector2Scale(jogo->jogador.direcao, -30));
     }
 }
 

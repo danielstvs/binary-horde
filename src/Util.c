@@ -29,3 +29,10 @@ void agruparInicioVetor( Inimigo *inimigo, int quantidadeVivos) {
     // SWAP-AND-POP
     // VALIDO QUANDO PRECISAR ELIMINAR INIMIGOS 
 }
+
+Vector2 centro2V(Vector2 pos, Vector2 tam) {
+    return (Vector2){
+        .x = pos.x + tam.x / 2.0f,
+        .y = pos.y + tam.y / 2.0f
+    };
+}

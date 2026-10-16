@@ -2,6 +2,7 @@
 
 #include "Inimigo.h"
 #include "Jogador.h"
+#include "Projeteis.h"
 #include "raylib.h"
 
 #define QTD_MAX_INIMIGOS 5000
@@ -11,11 +12,13 @@ typedef struct Jogo {
     Jogador jogador;
     Camera2D camera;
     Inimigo inimigo[QTD_MAX_INIMIGOS];
+    Projetil projeteis[QTD_MAX_PROJETEIS];
     
     int qtdInimigosAtivos;
     float acumuladorNascInimigos;
     float velSuavidadeCamera;
-    float tempoDecorrido;
+    float tempoDecorrido; // CONTA DESDE O INICIO DA APLICAÇÃO.
+    // PARA CRIAR UM CONTADOR DE PARTIDA CRIAR OUTRA VARIAVEL QUE ACUMULA DELTA QUANDO A PARTIDA INICIA.
 } Jogo;
 
 /**

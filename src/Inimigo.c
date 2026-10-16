@@ -10,6 +10,7 @@ Inimigo criarInimigo(
     Color cor ) {
 
     return (Inimigo){
+        .idInimigo = GetRandomValue( 1, 10000 ), // DEPOIS TRATAR GERAÇÃO NUMEROS REPETIDOS.
         .posicao = calcularPosicaoCircunferencia( posicaoJogador ),
         .dimensao = dimensao,
         .cor = cor,

@@ -1,7 +1,9 @@
 #include "Jogo.h"
 #include "Camera.h"
 #include "ControleInimigos.h"
+#include "ControleAtaques.h"
 #include "Recursos.h"
+#include "Util.h"
 
 #include"raylib.h"
 #include "raymath.h"
@@ -21,6 +23,7 @@ Jogo *criarJogo( void ) {
     jogo->jogador = criarJogador();
     jogo->camera = criarCamera();
     memset( jogo->inimigo, 0, sizeof( jogo->inimigo ) );
+    memset( jogo->projeteis, 0, sizeof( jogo->projeteis ) );
     jogo->qtdInimigosAtivos = 0;
     jogo->acumuladorNascInimigos = 0.0f;
     jogo->velSuavidadeCamera = 8.0f;
@@ -33,11 +36,16 @@ void atualizarJogo( Jogo *jogo, float delta ) {
     jogo->tempoDecorrido = GetTime();
     jogo->acumuladorNascInimigos += TAXA_POR_SEGUNDO * delta;
     
-    gerenciarNascInimigos( jogo );
     processarEntradaJogador( &jogo->jogador );
     atualizarJogador( jogo, delta);
-    atualizaInimigosAtivos( jogo, delta);
     moverCamera( &jogo->camera, &jogo->jogador, jogo->velSuavidadeCamera, delta);
+    gerenciarNascInimigos( jogo );
+    atualizarArmasJogador( &jogo->jogador, jogo->projeteis, jogo->inimigo, delta );
+    atualizarProjeteis( centro2V( jogo->jogador.posicao, jogo->jogador.dimensao ), 
+        jogo->projeteis, delta );
+    atualizaInimigosAtivos( jogo, delta);
+    // MORTES
+    // XP E LEVEL UP
 
     if( jogo->jogador.pontosVida <= 0.0f){
         // tela de morte
@@ -52,17 +60,18 @@ void desenharJogo( Jogo *jogo ) {
     // FUNÇÕES DE MENU AQUI !
 
     BeginMode2D(jogo->camera);
+        desenharProjeteis( jogo->projeteis );
         desenharJogador( &jogo->jogador );
         desenhaInimigosAtivos( jogo );
     EndMode2D();
 
 // LINHAS SOMENTE PARA TESTES
-    for(int i = 0; i < 7; i++ ){ //  linhas
-        for(int j = 0; j < 5; j++ ){  // colunas
-            DrawLine(0, j * 144, GetRenderWidth(), j * 144, GREEN); //  linha
-            DrawLine(i * 182.8574, 0, i * 182.8574, GetRenderHeight(), GREEN);// coluna
-        }
-    }
+    // for(int i = 0; i < 7; i++ ){ //  linhas
+    //     for(int j = 0; j < 5; j++ ){  // colunas
+    //         DrawLine(0, j * 144, GetRenderWidth(), j * 144, GREEN); //  linha
+    //         DrawLine(i * 182.8574, 0, i * 182.8574, GetRenderHeight(), GREEN);// coluna
+    //     }
+    // }
     DrawText(
         TextFormat( "Tempo: %.2f s\n"
                 "Inimigos: %d\n"

@@ -17,8 +17,7 @@ typedef struct HashGrid {
     CelulaGrid matrizTabela[5][7];
 } HashGrid;
 
-//bool checarColisao(  );
-
 void gerarHashGrid( int largura, int altura );
 
 bool checarColisaoJogador( Jogador *jogador, Inimigo *inimigos, int qtdAtivos );
+
