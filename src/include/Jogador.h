@@ -13,9 +13,8 @@ typedef struct Jogador {
     ArmaDoJogador armas[QTD_MAX_ARMAS_JOGADOR];
     Vector2 posicao;
     Vector2 direcao;
-    Vector2 dimensao;
-    Color cor;
     int qtdArmasAtivas;
+    float raio;
     float velocidade;
     float pontosVida;
     float tempoInvulneravel;

@@ -1,29 +1,34 @@
 #include "ControleInimigos.h"
 
-#define TAM_INIMIGO 32
 #define VEL_INIMIGO 50.0f
 
 void gerenciarNascInimigos( Jogo *jogo ) {
     while( jogo->acumuladorNascInimigos >= 1.0f && 
             jogo->qtdInimigosAtivos < QTD_MAX_INIMIGOS ) {
-        
-                jogo->inimigo[jogo->qtdInimigosAtivos] = criarInimigo( // CRIAR FUNÇÃO QUE GERENCIA OS ATRIBUTOS DOS INIMIGOS A SEREM GERADOS DE ACORDO COM O AUMENTO DE DIFICULDADE.
-            (Vector2){ TAM_INIMIGO, TAM_INIMIGO }, jogo->jogador.posicao, VEL_INIMIGO, RED );
+// CRIAR FUNÇÃO QUE GERENCIA OS ATRIBUTOS DOS INIMIGOS A SEREM GERADOS DE ACORDO COM O TEMPO.
+        jogo->inimigo[jogo->qtdInimigosAtivos] = criarInimigo( 
+            jogo->jogador.posicao,
+            TAM_INIMIGO / 2, 80,
+            10,
+            jogo->qtdInimigosAtivos
+        );
         jogo->qtdInimigosAtivos += 1;
         jogo->acumuladorNascInimigos -= 1.0f;
     }
 }
-
-void atualizaInimigosAtivos( Jogo *jogo, float delta ) {
-    for ( int i = 0; i < jogo->qtdInimigosAtivos; i++ ) {
-        if ( jogo->inimigo[i].ativo )
-            atualizarInimigo( &jogo->inimigo[i], &jogo->jogador, delta ); 
+// Verificar se enviar a posição do jogador para atualizar os inimigos
+// pode fazer que eles se movam para uma posição anterior do jogador.
+// Caso isso ocorra, passar como parâmetro o endereço do jogador.
+void atualizaInimigosAtivos( Inimigo *inimigo, Vector2 posJogador, int qtdAtivos, float delta ) {
+    for ( int i = 0; i < qtdAtivos; i++ ) {
+        if ( inimigo[i].ativo )
+            atualizarInimigo( &inimigo[i], posJogador, delta ); 
     }
 }
 
-void desenhaInimigosAtivos( Jogo *jogo ) {
-    for ( int i = 0; i < jogo->qtdInimigosAtivos; i++ ) {
-        if ( jogo->inimigo[i].ativo )
-            desenharInimigo( &jogo->inimigo[i] );
+void desenhaInimigosAtivos( Inimigo *inimigo, int qtdAtivos ) {
+    for ( int i = 0; i < qtdAtivos; i++ ) {
+        if ( inimigo[i].ativo )
+            desenharInimigo( &inimigo[i] );
     }
 }

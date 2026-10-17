@@ -20,9 +20,7 @@ Jogador criarJogador( void ) {
             GetScreenHeight() / 2.0f 
         },
         .direcao = Vector2Zero(),
-        .dimensao = (Vector2){ 
-            TAM_JOGADOR, TAM_JOGADOR },
-        .cor = BLUE,
+        .raio = TAM_JOGADOR / 2,
         .qtdArmasAtivas = 1,
         .velocidade = VELOCIDADE_INICIAL,
         .pontosVida = PV_INICIAL,
@@ -63,30 +61,42 @@ void verificarColisaoJogador( Jogo *jogo, float delta ) {
 }
 
 void atualizarJogador( Jogo *jogo, float delta )  {  
+    processarEntradaJogador( &jogo->jogador );
     movimentarJogador( &jogo->jogador, delta);
+    // Essa verificação de colisão deve ficar no ControleColisoes? Acredito que sim.
     verificarColisaoJogador( jogo, delta );
 }
 
 void desenharPV( Jogador *jogador ) {
     DrawRectangleV(
-        (Vector2){ jogador->posicao.x,
-            jogador->posicao.y + jogador->dimensao.y + ESPACO_VAZIO },
-        (Vector2){ jogador->dimensao.x, ESPACO_VAZIO },
+        (Vector2){ 
+            jogador->posicao.x - TAM_JOGADOR / 2,
+            jogador->posicao.y + TAM_JOGADOR / 2 + ESPACO_VAZIO 
+        },
+        (Vector2){ 
+            TAM_JOGADOR, 
+            ESPACO_VAZIO / 2
+        },
         RED
     );
     DrawRectangleV(
-        (Vector2){ jogador->posicao.x,
-            jogador->posicao.y + jogador->dimensao.y + ESPACO_VAZIO },
-        (Vector2){ jogador->dimensao.x * jogador->pontosVida / 100.0f, ESPACO_VAZIO },
+        (Vector2){ 
+            jogador->posicao.x - TAM_JOGADOR / 2,
+            jogador->posicao.y + TAM_JOGADOR / 2 + ESPACO_VAZIO 
+        },
+        (Vector2){ 
+            TAM_JOGADOR * jogador->pontosVida / 100.0f,
+            ESPACO_VAZIO
+        },
         GREEN
     );
 }
 
 void desenharJogador( Jogador *jogador ) {
-    DrawRectangleV(
+    DrawCircleV(
         jogador->posicao,
-        jogador->dimensao,
-        jogador->cor
+        jogador->raio,
+        BLUE
     );
     desenharPV(jogador);
 }

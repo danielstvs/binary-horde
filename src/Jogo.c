@@ -34,16 +34,15 @@ Jogo *criarJogo( void ) {
 
 void atualizarJogo( Jogo *jogo, float delta ) {
     jogo->tempoDecorrido = GetTime();
-    jogo->acumuladorNascInimigos += TAXA_POR_SEGUNDO * delta;
+    jogo->acumuladorNascInimigos += TAXA_INIMIGO_POR_SEGUNDO * delta;
     
-    processarEntradaJogador( &jogo->jogador );
     atualizarJogador( jogo, delta);
     moverCamera( &jogo->camera, &jogo->jogador, jogo->velSuavidadeCamera, delta);
     gerenciarNascInimigos( jogo );
     atualizarArmasJogador( &jogo->jogador, jogo->projeteis, jogo->inimigo, delta );
-    atualizarProjeteis( centro2V( jogo->jogador.posicao, jogo->jogador.dimensao ), 
+    atualizarProjeteis( centro2V( jogo->jogador.posicao, jogo->jogador.posicao ), 
         jogo->projeteis, delta );
-    atualizaInimigosAtivos( jogo, delta);
+    atualizaInimigosAtivos( jogo->inimigo, jogo->jogador.posicao, jogo->qtdInimigosAtivos, delta);
     // MORTES
     // XP E LEVEL UP
 
@@ -62,7 +61,7 @@ void desenharJogo( Jogo *jogo ) {
     BeginMode2D(jogo->camera);
         desenharProjeteis( jogo->projeteis );
         desenharJogador( &jogo->jogador );
-        desenhaInimigosAtivos( jogo );
+        desenhaInimigosAtivos( jogo->inimigo, jogo->qtdInimigosAtivos );
     EndMode2D();
 
 // LINHAS SOMENTE PARA TESTES

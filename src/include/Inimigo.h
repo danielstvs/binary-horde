@@ -3,25 +3,18 @@
 #include "raylib.h"
 #include <stdbool.h>
 
-typedef struct Jogador Jogador;
+#define TAM_INIMIGO 32
 
 typedef struct Inimigo {
-    int idInimigo;
     Vector2 posicao;
-    Vector2 dimensao;
+    int idInimigo;
+    float raio;
     float velocidade;
+    float pontosVida;
     bool ativo;
-    Color cor;
 } Inimigo;
 
-/**
- * @brief Cria a instância do Inimigo.
- * 
- * @param dimensao  Tamanho do inimigo.
- * @param cor       Cor do inimigo.
- * @return Inimigo 
- */
-Inimigo criarInimigo( Vector2 dimensao, Vector2 posicaoJogador, float velocidade, Color cor ); // A FUNÇÃO DE CONTROLE DE INIMIGOS DEVE INFORMAR QUAIS PARAMETROS PARA GERAR O TIPO DE ININMIGO DE ACORDO COM A DIFICULDADE.
+Inimigo criarInimigo( Vector2 posJogador, float raio, float velocidade, float pontosVida, int id );
 
 /**
  * @brief Atualiza os atributos do inimigo.
@@ -30,7 +23,7 @@ Inimigo criarInimigo( Vector2 dimensao, Vector2 posicaoJogador, float velocidade
  * @param jogador Endereço do inimigo.
  * @param delta Tempo que o ultimo quadro do jogo levou para ser desenhado. 
  */
-void atualizarInimigo( Inimigo *inimigo, Jogador *jogador, float delta );
+void atualizarInimigo( Inimigo *inimigo, Vector2 posJogador, float delta );
 
 /**
  * @brief Desenha o inimigo na tela.

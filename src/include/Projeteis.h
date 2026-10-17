@@ -13,8 +13,8 @@
 typedef struct Projetil {
     ArmaDoJogador dadosArma;
     Vector2 posicao;
-    Vector2 dimensao;
     Vector2 direcao;
+    float raio;
     bool ativo;
 } Projetil;
 

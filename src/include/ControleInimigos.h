@@ -19,7 +19,7 @@ void gerenciarNascInimigos( Jogo *jogo );
  * @param jogo 
  * @param delta 
  */
-void atualizaInimigosAtivos( Jogo *jogo, float delta );
+void atualizaInimigosAtivos( Inimigo *inimigo, Vector2 posJogador, int qtdAtivos, float delta );
 
 /**
  * @brief Percorre o array até indice[QuantidadeInimigosAtivos] e
@@ -27,4 +27,4 @@ void atualizaInimigosAtivos( Jogo *jogo, float delta );
  * 
  * @param jogo 
  */
-void desenhaInimigosAtivos( Jogo *jogo );
+void desenhaInimigosAtivos( Inimigo *inimigo, int qtdAtivos );

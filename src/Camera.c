@@ -22,10 +22,7 @@ Camera2D criarCamera( void ) {
 void moverCamera( Camera2D *camera, Jogador *jogador, float velSuavidadeCamera, float delta) {
     camera->target = Vector2Lerp( 
         camera->target,
-        (Vector2){  // Calcula o centro do personagem no quadro atual.
-            jogador->posicao.x + ( jogador->dimensao.x / 2.0f ),
-            jogador->posicao.y + ( jogador->dimensao.y / 2.0f )
-        },
+        jogador->posicao,
         velSuavidadeCamera * delta
     );
 }

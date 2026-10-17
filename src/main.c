@@ -11,7 +11,7 @@ int main( void ) {
         720,             // height
         "Binary Horde",  // title
         60,              // target FPS
-        false,           // antialiasing
+        true,            // antialiasing
         false,           // resizable
         false,           // full screen
         false,           // undecorated

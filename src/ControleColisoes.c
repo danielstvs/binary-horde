@@ -7,19 +7,12 @@ void gerarHashGrid( int largura, int altura ) {
 
 bool checarColisaoJogador( Jogador *jogador, Inimigo *inimigos, int qtdAtivos ) {
     for( int x = 0; x < qtdAtivos; x++ ) {
-        if ( CheckCollisionRecs(
-            (Rectangle){
-                jogador->posicao.x,
-                jogador->posicao.y,
-                jogador->dimensao.x,
-                jogador->dimensao.y
-            },
-            (Rectangle){
-                inimigos[x].posicao.x,
-                inimigos[x].posicao.y,
-                inimigos[x].dimensao.x,
-                inimigos[x].dimensao.y
-            }) ){
+        if ( CheckCollisionCircles( 
+                jogador->posicao, 
+                jogador->raio, 
+                inimigos[x].posicao, 
+                inimigos[x].raio
+            ) ){
             return true;
         }
     }

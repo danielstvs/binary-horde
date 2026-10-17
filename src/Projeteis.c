@@ -7,7 +7,7 @@ void criarProjetil( Projetil *projetil, ArmaDoJogador *arma, Vector2 posJogador,
             projetil[x] = (Projetil){
                 .ativo = true,
                 .dadosArma = (*arma),
-                .dimensao = { TAM_PROJETIL, TAM_PROJETIL },
+                .raio = TAM_PROJETIL / 2,
                 .posicao = posJogador,
                 .direcao = direcaoAlvo
             };
@@ -32,9 +32,9 @@ void atualizarProjeteis( Vector2 posJogador, Projetil *projetil, float delta ) {
 void desenharProjeteis( Projetil *projetil ) {
     for( int x = 0; x < QTD_MAX_PROJETEIS; x++ ) {
         if( projetil[x].ativo ){
-            DrawRectangleV(
+            DrawCircleV(
                 projetil[x].posicao,
-                projetil[x].dimensao,
+                projetil[x].raio,
                 BLACK
             );
         }

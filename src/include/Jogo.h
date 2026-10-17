@@ -6,7 +6,7 @@
 #include "raylib.h"
 
 #define QTD_MAX_INIMIGOS 5000
-#define TAXA_POR_SEGUNDO 5.75f
+#define TAXA_INIMIGO_POR_SEGUNDO 5.75f
 
 typedef struct Jogo {
     Jogador jogador;
