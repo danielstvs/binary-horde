@@ -15,10 +15,14 @@ Vector2 calcularPosicaoCircunferencia( Vector2 posAtualJogador ) {
     // AO COLOCAR O RAIO DE 1470px OS INIMIGOS DEMORAM ~= 20s PARA APARECER NA TELA,
     // PENSAR EM UMA SOLUÇÃO QUE, A PARTIR DO TEMPO, CHAMA EVENTOS NO MAPA ( GERA CHEFES, ITENS DE CURA, EVENTOS ALEATÓRIOS).
     // POR HORA, TESTAR SE O TEMPO DE JOGO É MENOR QUE 15s TEM RESOLVIDO. VERIFICAR DEPOIS.
-    if ( GetTime() < 15.0f ){
-        raio = GetRandomValue( 700, 710 );
-    }
 
+    if( GetTime() > 15.0f ){
+        return (Vector2) {
+            centroTela.x + cosf( angulo ) * raio,
+            centroTela.y + sinf( angulo ) * raio
+        };
+    }
+    raio = GetRandomValue( 700, 710 );
     return (Vector2) {
         centroTela.x + cosf( angulo ) * raio,
         centroTela.y + sinf( angulo ) * raio
@@ -28,11 +32,4 @@ Vector2 calcularPosicaoCircunferencia( Vector2 posAtualJogador ) {
 void agruparInicioVetor( Inimigo *inimigo, int quantidadeVivos) {
     // SWAP-AND-POP
     // VALIDO QUANDO PRECISAR ELIMINAR INIMIGOS 
-}
-
-Vector2 centro2V(Vector2 pos, Vector2 tam) {
-    return (Vector2){
-        .x = pos.x + tam.x / 2.0f,
-        .y = pos.y + tam.y / 2.0f
-    };
 }

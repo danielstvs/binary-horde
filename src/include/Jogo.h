@@ -17,14 +17,15 @@ typedef struct Jogo {
     int qtdInimigosAtivos;
     float acumuladorNascInimigos;
     float velSuavidadeCamera;
-    float tempoDecorrido; // CONTA DESDE O INICIO DA APLICAÇÃO.
-    // PARA CRIAR UM CONTADOR DE PARTIDA CRIAR OUTRA VARIAVEL QUE ACUMULA DELTA QUANDO A PARTIDA INICIA.
+    float tempoDecorrido;
+    float tempoPartida;
 } Jogo;
 
 /**
- * @brief Cria uma instância da struct Jogo alocada dinamicamente.
+ * @brief Aloca dinâmicamente a estrutura
+ * do jogo e zera todos os atributos.
  * 
- * @return Jogo* Ponteiro para o jogo criado ou NULL se falhar.
+ * @return Jogo*
  */
 Jogo *criarJogo( void );
 

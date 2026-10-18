@@ -14,7 +14,6 @@ void atualizarArma( ArmaDoJogador *arma, Jogador *jogador, Projetil *projetil, I
     while ( arma->tmpRecargaRestante <= 0 ) { // Usar while permite que a cadência de disparos seja mantida.
         if( disparar( arma, jogador, projetil, inimigo, delta) ){
             arma->tmpRecargaRestante += arma->tmpRecargaBase;
-            // atualizarProjeteis( centro2V( jogador->posicao, jogador->dimensao ), projetil, delta);
         } else { // Caso não encontre nenhum alvo.
            arma->tmpRecargaRestante = 0.0f;
            break; 

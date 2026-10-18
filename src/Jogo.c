@@ -19,15 +19,10 @@
 
 Jogo *criarJogo( void ) {
 
-    Jogo *jogo = (Jogo*) malloc( sizeof( Jogo ) );
+    Jogo *jogo = (Jogo*) calloc( sizeof( Jogo ), 1 );
     jogo->jogador = criarJogador();
     jogo->camera = criarCamera();
-    memset( jogo->inimigo, 0, sizeof( jogo->inimigo ) );
-    memset( jogo->projeteis, 0, sizeof( jogo->projeteis ) );
-    jogo->qtdInimigosAtivos = 0;
-    jogo->acumuladorNascInimigos = 0.0f;
     jogo->velSuavidadeCamera = 8.0f;
-    jogo->tempoDecorrido = 0.0f;
 
     return jogo;
 }
@@ -36,19 +31,17 @@ void atualizarJogo( Jogo *jogo, float delta ) {
     jogo->tempoDecorrido = GetTime();
     jogo->acumuladorNascInimigos += TAXA_INIMIGO_POR_SEGUNDO * delta;
     
-    atualizarJogador( jogo, delta);
+    atualizarJogador( &jogo->jogador, delta );
     moverCamera( &jogo->camera, &jogo->jogador, jogo->velSuavidadeCamera, delta);
-    gerenciarNascInimigos( jogo );
+    gerarInimigos( jogo );
     atualizarArmasJogador( &jogo->jogador, jogo->projeteis, jogo->inimigo, delta );
-    atualizarProjeteis( centro2V( jogo->jogador.posicao, jogo->jogador.posicao ), 
-        jogo->projeteis, delta );
+
+    atualizarProjeteis( jogo->jogador.posicao, jogo->projeteis, delta );
     atualizaInimigosAtivos( jogo->inimigo, jogo->jogador.posicao, jogo->qtdInimigosAtivos, delta);
+    
+    // COLISOES TODAS!
     // MORTES
     // XP E LEVEL UP
-
-    if( jogo->jogador.pontosVida <= 0.0f){
-        // tela de morte
-    }
 }
 
 void desenharJogo( Jogo *jogo ) {
@@ -86,8 +79,6 @@ void desenharJogo( Jogo *jogo ) {
         BLACK
     );
     DrawText(TextFormat("%.2f",GetFrameTime() * 1000),100,20,20,BLACK);
-    //DrawLine(0, GetRenderHeight() / 2.0f, GetRenderWidth(), GetRenderHeight() / 2.0f, GREEN);
-    //DrawLine(GetRenderWidth() / 2.0f, 0, GetRenderWidth() / 2.0f, GetRenderHeight(), GREEN);
 
     DrawFPS( 5, 5 );
     

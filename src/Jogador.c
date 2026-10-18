@@ -1,6 +1,7 @@
 #include "Jogador.h"
 #include "ControleColisoes.h"
 #include "Jogo.h"
+
 #include "raymath.h"
 
 #define TAM_JOGADOR 48
@@ -27,14 +28,14 @@ Jogador criarJogador( void ) {
         .tempoInvulneravel = 0.0f,
     };
 }
+
 /**
- *  Garante que o personagem fique parado caso haja 
- *  interrupção das instruções de movimento;
- *  Lê os atalhos de teclado correspondente à direção dos comandos;
- *  Calcula a normalização para evitar ganho de velocidade
- *  ao se movimentar nas diagonais.
+ * Garante que o personagem fique parado caso haja 
+ * interrupção das instruções de movimento. Calcula
+ * a normalização para evitar ganho de velocidade
+ * ao se movimentar nas diagonais.
  */
-void processarEntradaJogador( Jogador *jogador ) {
+void atualizarJogador( Jogador *jogador, float delta ) {
     jogador->direcao = Vector2Zero();
     
     if ( IsKeyDown( KEY_A ) ) jogador->direcao.x -= 1.0f;
@@ -43,28 +44,18 @@ void processarEntradaJogador( Jogador *jogador ) {
     if ( IsKeyDown( KEY_S ) ) jogador->direcao.y += 1.0f;
   
     jogador->direcao = Vector2Normalize( jogador->direcao );
-}
 
-void movimentarJogador( Jogador *jogador, float delta ) {
     jogador->posicao.x += jogador->direcao.x * jogador->velocidade * delta;
     jogador->posicao.y += jogador->direcao.y * jogador->velocidade * delta;
 }
 
-void verificarColisaoJogador( Jogo *jogo, float delta ) {
-    if( jogo->jogador.tempoInvulneravel > 0.0f ) {
-        jogo->jogador.tempoInvulneravel -= delta;
-    } else if( checarColisaoJogador(&jogo->jogador, jogo->inimigo, jogo->qtdInimigosAtivos) ) {
-        jogo->jogador.pontosVida -= 10.0f; // CALCULAR DANO INIMIGO
-        jogo->jogador.tempoInvulneravel = TEMP_INVULNERAVEL;
-        jogo->jogador.posicao = Vector2Add(jogo->jogador.posicao,Vector2Scale(jogo->jogador.direcao, -30));
-    }
-}
-
-void atualizarJogador( Jogo *jogo, float delta )  {  
-    processarEntradaJogador( &jogo->jogador );
-    movimentarJogador( &jogo->jogador, delta);
-    // Essa verificação de colisão deve ficar no ControleColisoes? Acredito que sim.
-    verificarColisaoJogador( jogo, delta );
+void desenharJogador( Jogador *jogador ) {
+    DrawCircleV(
+        jogador->posicao,
+        jogador->raio,
+        BLUE
+    );
+    desenharPV(jogador);
 }
 
 void desenharPV( Jogador *jogador ) {
@@ -75,7 +66,7 @@ void desenharPV( Jogador *jogador ) {
         },
         (Vector2){ 
             TAM_JOGADOR, 
-            ESPACO_VAZIO / 2
+            ESPACO_VAZIO
         },
         RED
     );
@@ -90,13 +81,4 @@ void desenharPV( Jogador *jogador ) {
         },
         GREEN
     );
-}
-
-void desenharJogador( Jogador *jogador ) {
-    DrawCircleV(
-        jogador->posicao,
-        jogador->raio,
-        BLUE
-    );
-    desenharPV(jogador);
 }

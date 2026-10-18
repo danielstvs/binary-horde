@@ -10,7 +10,7 @@
  * 
  * @param jogo 
  */
-void gerenciarNascInimigos( Jogo *jogo );
+void gerarInimigos( Jogo *jogo );
 
 /**
  * @brief Percorre o array até indice[QuantidadeInimigosAtivos] e

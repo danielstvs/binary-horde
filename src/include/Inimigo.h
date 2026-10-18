@@ -14,20 +14,31 @@ typedef struct Inimigo {
     bool ativo;
 } Inimigo;
 
+/**
+ * @brief Cria um novo inimigo com os parâmetros recebidos.
+ * O número de id é o contador de inimigos ativos + 1.
+ * 
+ * @param posJogador Posição atual do jogador.
+ * @param raio Raio do inimigo.
+ * @param velocidade Velocidade do inimigo.
+ * @param pontosVida Quantidade de pontos de vida do inimigo.
+ * @param id Contador de inimigos ativos.
+ * @return Inimigo
+ */
 Inimigo criarInimigo( Vector2 posJogador, float raio, float velocidade, float pontosVida, int id );
 
 /**
- * @brief Atualiza os atributos do inimigo.
+ * @brief Atualiza a posição dos inimigos.
  * 
- * @param inimigo Endereço do inimigo.
- * @param jogador Endereço do inimigo.
- * @param delta Tempo que o ultimo quadro do jogo levou para ser desenhado. 
+ * @param inimigo 
+ * @param posJogador 
+ * @param delta 
  */
-void atualizarInimigo( Inimigo *inimigo, Vector2 posJogador, float delta );
+void atualizarPosInimigo( Inimigo *inimigo, Vector2 posJogador, float delta );
 
 /**
  * @brief Desenha o inimigo na tela.
  * 
- * @param inimigo Endereço do inimigo.
+ * @param inimigo
  */
 void desenharInimigo( Inimigo *inimigo );

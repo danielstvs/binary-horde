@@ -13,11 +13,3 @@
 Vector2 calcularPosicaoCircunferencia( Vector2 posAtualJogador );
 
 void agruparInicioVetor( Inimigo *inimigo, int quantidadeVivos);
-
-/**
- * @brief Calcula o centro de um retangulo.
- * 
- * @param retangulo 
- * @return Vector2 
- */
-Vector2 centro2V(Vector2 pos, Vector2 tam);

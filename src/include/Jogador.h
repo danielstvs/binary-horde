@@ -1,13 +1,12 @@
 #pragma once
 
 #include "ArmaDoJogador.h"
+
 #include "raylib.h"
 
 #define QTD_MAX_ARMAS_JOGADOR 6
 
-typedef struct Jogo Jogo;   //forward declaration.
-//  Estava causando problemas de inclusão circulares
-//  RESOLVER DEPOIS !!
+typedef struct Jogo Jogo;
 
 typedef struct Jogador {
     ArmaDoJogador armas[QTD_MAX_ARMAS_JOGADOR];
@@ -28,28 +27,18 @@ typedef struct Jogador {
 Jogador criarJogador( void );
 
 /**
- * @brief Lê os comandos de movimento do jogador.
- *
- */
-void processarEntradaJogador( Jogador *jogador );
-
-void movimentarJogador( Jogador *jogador, float delta );
-
-void verificarColisaoJogador( Jogo *jogo, float delta );
-
-/**
- * @brief Atualiza os atributos do jogador.
+ * @brief Processa a os comandos de entrada, movimenta
+ * o jogador e verifica colisões.
  * 
- * @param jogador Endereço do jogador.
- * @param delta Tempo que o ultimo quadro do jogo levou para ser desenhado. 
+ * @param jogador
+ * @param delta
  */
-void atualizarJogador( Jogo *jogo, float delta );
-
-void desenharPV( Jogador *jogador );
+void atualizarJogador( Jogador *jogador, float delta );
 
 /**
  * @brief Desenha o jogador na tela.
  * 
- * @param jogador Endereço do jogador.
+ * @param jogador
  */
 void desenharJogador( Jogador *jogador );
+void desenharPV( Jogador *jogador );
